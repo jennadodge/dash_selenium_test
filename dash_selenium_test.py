@@ -255,4 +255,4 @@ def update_graph(zip_code):  # function arguments come from the component proper
 
 # Run app
 if __name__=='__main__':
-    app.run_server(debug=False, port=8047)
+    app.run_server(debug=False)#, port=8047)

@@ -110,16 +110,18 @@ def scrape_ewg(zip_code):  # function arguments come from the component property
     main_utility = table[0]["Utility name"][0]
     output = "The main utility in this zip is {}".format(main_utility)
 
-    # start_time = time.time()
+    start_time = time.time()
 
-    # #Begin Scrape
-    # # driver = webdriver.Chrome()
-    # chrome_options = webdriver.ChromeOptions()
-    # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    # # chrome_options.add_argument("--headless")
-    # chrome_options.add_argument("--disable-dev-shm-usage")
-    # chrome_options.add_argument("--no-sandbox")
-    # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    #Begin Scrape
+    # driver = webdriver.Chrome()
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    # chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+
+    scraping_confirmation = "The app is gathering data for zip code {}".format(zip_code)
 
     # contaminant_list = []
     # for utility in utility_list:
@@ -247,7 +249,7 @@ def scrape_ewg(zip_code):  # function arguments come from the component property
     # total_contaminants = "The total contaminants found in your area is: {}".format(cont_num)
     # scrape_time = "The time it took to gather this data was: {}".format(total_time)
 
-    return output
+    return output,scraping_confirmation
 
     # # https://plotly.com/python/choropleth-maps/
     # fig = px.choropleth(

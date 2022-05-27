@@ -44,19 +44,30 @@ with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-c
 
 app.layout = dbc.Container([
      dbc.Row(
-        dbc.Col(html.H1("Water Quality Analysis",
-                        className='text-center text-primary mb-4'),
+        dbc.Col([
+            html.H1("Water Quality Analysis",
+                    className='text-center text-primary mb-4')],
                 width=12)
     ),
     dbc.Row([
-        dbc.Col([dcc.Markdown(id='confirmation',children='')], width=12)
+        dbc.Col([
+            dcc.Markdown(id='confirmation',children='')], width=12)
     ], justify='center'),
+
     dbc.Row([
-        dbc.Col([dcc.Markdown(id='total_cont',children='')], width=12)
+        dbc.Col([
+            dcc.Markdown(id='total_cont',children='')], width=12)
     ]),
+
     dbc.Row([
-        dbc.Col(html.H3("Enter a Zip Code:")),
-        dbc.Col([dcc.Input(id='zip_input',
+        dbc.Col([
+            dcc.Markdown(id='total_scrape_time',children='')], width=12)
+    ]),
+    
+    dbc.Row([
+        dbc.Col([
+            html.H3("Enter a Zip Code:"),
+            dcc.Input(id='zip_input',
                     type='numbers',
                     placeholder='Zip Code',
                     # value='',
@@ -74,15 +85,16 @@ app.layout = dbc.Container([
 )
 def confirm_zip(zip_code):
     
-    container = "Please wait, gathering data for zip code: {}".format(zip_code)
+    container = "The zip code chosen by the user is: {}".format(zip_code)
 
     return container
 
 @app.callback(
     Output('total_cont', 'children'),
+    Output('total_scrape_time','children'),
     Input('zip_input', 'value')
 )
-def update_graph(zip_code):  # function arguments come from the component property of the Input
+def scrape_ewg(zip_code):  # function arguments come from the component property of the Input
     # print(zip_code)
     # print(type(zip_code))
 
@@ -95,13 +107,13 @@ def update_graph(zip_code):  # function arguments come from the component proper
     #Build a list of the utilities to visit and scrape data from EWG
     utility_list = utilities_df['Utility name'].to_list()
 
-    # start_time = time.time()
+    start_time = time.time()
 
     #Begin Scrape
     # driver = webdriver.Chrome()
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
+    # chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
@@ -192,9 +204,9 @@ def update_graph(zip_code):  # function arguments come from the component proper
     # state_path_contaminant_output = os.path.join(path,'contaminants.csv')
     # scraped_df.to_csv(state_path_contaminant_output, index=False)
 
-    # finish_time = time.time()
+    finish_time = time.time()
 
-    # total_time = (finish_time - start_time)/60
+    total_time = (finish_time - start_time)/60
 
     # print(f'The process finished in finished in {total_time} minutes')
 
@@ -230,8 +242,9 @@ def update_graph(zip_code):  # function arguments come from the component proper
     df_final = pd.DataFrame(data, index=[0])
     cont_num = df_final.loc[0,'Num_Contaminants']
     total_contaminants = "The total contaminants found in your area is: {}".format(cont_num)
+    scrape_time = "The time it took to gather this data was: {}".format(total_time)
 
-    return total_contaminants
+    return total_contaminants, scrape_time
 
     # # https://plotly.com/python/choropleth-maps/
     # fig = px.choropleth(

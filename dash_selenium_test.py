@@ -106,7 +106,8 @@ def confirm_zip(zip_code):
     Output('total_scrape_time','children'),
     Input('zip_input', 'value')
 )
-def scrape_ewg(zip_code):  # function arguments come from the component property of the Input
+
+def scrape_utilities(zip_code):  # function arguments come from the component property of the Input
     # print(zip_code)
     # print(type(zip_code))
 
@@ -121,6 +122,17 @@ def scrape_ewg(zip_code):  # function arguments come from the component property
 
     main_utility = table[0]["Utility name"][0]
     output = "The main utility in this zip is {}".format(main_utility)
+
+#     return output
+
+# @app.callback(
+#     Output('scraping_confirmation','children'),
+#     Output('total_cont', 'children'),
+#     Output('total_scrape_time','children'),
+#     Input('zip_input', 'value')
+# )
+
+# def scrape_ewg(zip_code):
 
     start_time = time.time()
 
@@ -179,24 +191,24 @@ def scrape_ewg(zip_code):  # function arguments come from the component property
                     data_measure.append(measurement)
                     #print(data_measure)
 
-                # try:
-                #     d['Utility Measuremnt'] = data_measure[data_measure.index('THIS UTILITY')+1]
-                # except ValueError:
-                #     print("A value error arose")
-                # except:
-                #     print("Something else went wrong")
-                # try:
-                #     d['EWG HEALTH GUIDELINE'] = data_measure[data_measure.index('EWG HEALTH GUIDELINE')+1]
-                # except ValueError:
-                #     print("A value error arose")
-                # except:
-                #     print("Something else went wrong") 
-                # try:
-                #     d['Legal Limit'] = data_measure[data_measure.index('LEGAL LIMIT')+1]
-                # except ValueError:
-                #     print("A value error arose")
-                # except:
-                #     print("Something else went wrong") 
+                try:
+                    d['Utility Measuremnt'] = data_measure[data_measure.index('THIS UTILITY')+1]
+                except ValueError:
+                    print("A value error arose")
+                except:
+                    print("Something else went wrong")
+                try:
+                    d['EWG HEALTH GUIDELINE'] = data_measure[data_measure.index('EWG HEALTH GUIDELINE')+1]
+                except ValueError:
+                    print("A value error arose")
+                except:
+                    print("Something else went wrong") 
+                try:
+                    d['Legal Limit'] = data_measure[data_measure.index('LEGAL LIMIT')+1]
+                except ValueError:
+                    print("A value error arose")
+                except:
+                    print("Something else went wrong") 
 
                 contaminant_list.append(d)
         except:
@@ -261,7 +273,7 @@ def scrape_ewg(zip_code):  # function arguments come from the component property
     total_contaminants = "The total contaminants found in your area is: {}".format(cont_num)
     scrape_time = "The time it took to gather this data was: {}".format(total_time)
 
-    return output,scraping_confirmation, total_contaminants, scrape_time
+    return scraping_confirmation, total_contaminants, scrape_time
 
     # # https://plotly.com/python/choropleth-maps/
     # fig = px.choropleth(

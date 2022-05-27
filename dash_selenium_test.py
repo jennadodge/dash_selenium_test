@@ -95,7 +95,7 @@ def update_graph(zip_code):  # function arguments come from the component proper
     #Build a list of the utilities to visit and scrape data from EWG
     utility_list = utilities_df['Utility name'].to_list()
 
-    start_time = time.time()
+    # start_time = time.time()
 
     #Begin Scrape
     # driver = webdriver.Chrome()
@@ -192,11 +192,11 @@ def update_graph(zip_code):  # function arguments come from the component proper
     # state_path_contaminant_output = os.path.join(path,'contaminants.csv')
     # scraped_df.to_csv(state_path_contaminant_output, index=False)
 
-    finish_time = time.time()
+    # finish_time = time.time()
 
-    total_time = (finish_time - start_time)/60
+    # total_time = (finish_time - start_time)/60
 
-    print(f'The process finished in finished in {total_time} minutes')
+    # print(f'The process finished in finished in {total_time} minutes')
 
     df = scraped_df.copy()
     df =df.replace(r'^\s*$', np.nan, regex=True)

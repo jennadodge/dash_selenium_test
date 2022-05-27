@@ -28,7 +28,7 @@ with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-c
     counties = json.load(response)
 
 # Build your components
-app = Dash(__name__, external_stylesheets=[dbc.themes.SOLAR])
+# app = Dash(__name__, external_stylesheets=[dbc.themes.SOLAR])
 # mytitle = dcc.Markdown(children='')
 # # mygraph = dcc.Graph(figure={})
 # total_cont = dcc.Markdown(children='')

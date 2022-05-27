@@ -83,8 +83,8 @@ def confirm_zip(zip_code):
     Input('zip_input', 'value')
 )
 def update_graph(zip_code):  # function arguments come from the component property of the Input
-    print(zip_code)
-    print(type(zip_code))
+    # print(zip_code)
+    # print(type(zip_code))
 
     # container = "The zip code chosen by the user was: {}".format(zip_code)
 
@@ -150,29 +150,29 @@ def update_graph(zip_code):  # function arguments come from the component proper
                     data_measure.append(measurement)
                     #print(data_measure)
 
-                try:
-                    d['Utility Measuremnt'] = data_measure[data_measure.index('THIS UTILITY')+1]
-                except ValueError:
-                    print("A value error arose")
-                except:
-                    print("Something else went wrong")
-                try:
-                    d['EWG HEALTH GUIDELINE'] = data_measure[data_measure.index('EWG HEALTH GUIDELINE')+1]
-                except ValueError:
-                    print("A value error arose")
-                except:
-                    print("Something else went wrong") 
-                try:
-                    d['Legal Limit'] = data_measure[data_measure.index('LEGAL LIMIT')+1]
-                except ValueError:
-                    print("A value error arose")
-                except:
-                    print("Something else went wrong") 
+                # try:
+                #     d['Utility Measuremnt'] = data_measure[data_measure.index('THIS UTILITY')+1]
+                # except ValueError:
+                #     print("A value error arose")
+                # except:
+                #     print("Something else went wrong")
+                # try:
+                #     d['EWG HEALTH GUIDELINE'] = data_measure[data_measure.index('EWG HEALTH GUIDELINE')+1]
+                # except ValueError:
+                #     print("A value error arose")
+                # except:
+                #     print("Something else went wrong") 
+                # try:
+                #     d['Legal Limit'] = data_measure[data_measure.index('LEGAL LIMIT')+1]
+                # except ValueError:
+                #     print("A value error arose")
+                # except:
+                #     print("Something else went wrong") 
 
                 contaminant_list.append(d)
         except:
             pass
-    print('Done Scraping, moving on to dataset cleaning and file writing')
+    # print('Done Scraping, moving on to dataset cleaning and file writing')
     #Construct a dataframe from the results
     scraped_df = pd.DataFrame(contaminant_list)
 

@@ -1,1 +1,1 @@
-web: gunicorn dash_selenium_test.py
+web: gunicorn dash_selenium_test:server

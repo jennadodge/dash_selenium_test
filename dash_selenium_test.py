@@ -273,7 +273,7 @@ def scrape_utilities(zip_code):  # function arguments come from the component pr
     total_contaminants = "The total contaminants found in your area is: {}".format(cont_num)
     scrape_time = "The time it took to gather this data was: {}".format(total_time)
 
-    return scraping_confirmation, total_contaminants, scrape_time
+    return output, scraping_confirmation, total_contaminants, scrape_time
 
     # # https://plotly.com/python/choropleth-maps/
     # fig = px.choropleth(

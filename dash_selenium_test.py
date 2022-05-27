@@ -14,13 +14,6 @@ import plotly.express as px
 from urllib.request import urlopen
 import json
 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--no-sandbox")
-
-
 app = Dash(__name__,
                 external_stylesheets=[dbc.themes.SANDSTONE],
                 meta_tags=[{'name': 'viewport',
@@ -106,6 +99,11 @@ def update_graph(zip_code):  # function arguments come from the component proper
 
     #Begin Scrape
     # driver = webdriver.Chrome()
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
     contaminant_list = []

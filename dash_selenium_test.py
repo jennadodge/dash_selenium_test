@@ -14,12 +14,19 @@ import plotly.express as px
 from urllib.request import urlopen
 import json
 
+chrome_options = webdriver.ChromeOptions()
+chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--no-sandbox")
+driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+
 app = Dash(__name__,
                 external_stylesheets=[dbc.themes.SANDSTONE],
                 meta_tags=[{'name': 'viewport',
                             'content': 'width=device-width, initial-scale=1.0, maximum-scale=1.2, minimum-scale=0.5,'}]
                 )
-server=app.server
+# server=app.server
 
 # Read data
 df = pd.read_csv("census_data_for_graphs.csv", dtype={"zip":str,"fips":str})

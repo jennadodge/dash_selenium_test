@@ -74,7 +74,7 @@ app.layout = dbc.Container([
 )
 def confirm_zip(zip_code):
     
-    container = "The zip code chosen by the user was: {}".format(zip_code)
+    container = "Please wait, gathering data for zip code: {}".format(zip_code)
 
     return container
 

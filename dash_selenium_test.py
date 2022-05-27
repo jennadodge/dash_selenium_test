@@ -91,7 +91,7 @@ def confirm_zip(zip_code):
 
 @app.callback(
     Output('total_cont', 'children'),
-    # Output('total_scrape_time','children'),
+    Output('total_scrape_time','children'),
     Input('zip_input', 'value')
 )
 def scrape_ewg(zip_code):  # function arguments come from the component property of the Input

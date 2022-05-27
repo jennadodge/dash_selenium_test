@@ -19,7 +19,7 @@ chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
-driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+
 
 app = Dash(__name__,
                 external_stylesheets=[dbc.themes.SANDSTONE],
@@ -105,7 +105,8 @@ def update_graph(zip_code):  # function arguments come from the component proper
     start_time = time.time()
 
     #Begin Scrape
-    driver = webdriver.Chrome()
+    # driver = webdriver.Chrome()
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
     contaminant_list = []
     for utility in utility_list:
